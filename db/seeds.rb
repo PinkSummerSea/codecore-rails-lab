@@ -11,6 +11,21 @@ Product.destroy_all
 Review.destroy_all
 User.destroy_all
 
+super_user = User.create({
+  first_name: "Admin",
+  last_name: "User",
+  email: "admin@user.com",
+  password: "8855705",
+  is_admin: true
+})
+
+summer = User.create({
+  first_name: "Summer",
+  last_name: "Lin",
+  email: "lin.summer@outlook.com",
+  password: "8855705",
+  is_admin: true
+})
 
 10.times do
     first_name = Faker::Name.first_name
