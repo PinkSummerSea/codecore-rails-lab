@@ -174,3 +174,29 @@ a:hover {
    background-color: rgb(238, 237, 237) !important;
 }
 
+.index-card {
+   width: 18rem;
+}
+
+.right-table {
+   margin-left: 5em;
+}
+
+
+@media (max-width: 700px) {
+   .index-card {
+       width: 100%;
+
+   }
+
+   .left-half {
+      width: 100%;
+   }
+
+   .right-half {
+      margin-top: 2em;
+      width: 100%;
+      margin-left: 0%;
+   }
+
+}
