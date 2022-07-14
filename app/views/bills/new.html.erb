@@ -1,0 +1,17 @@
+<h1>Bill Splitter</h1>
+
+<%= form_with url: "/new", method: :get do |f| %>
+<%= f.label :amount %>
+<%= f.text_field :amount%>
+<%= f.label :tax %>
+<%= f.text_field :tax%>
+<%= f.label :tip %>
+<%= f.text_field :tip %>
+<%= f.label :people %>
+<%= f.text_field :people %>
+<%= f.submit "Submit"%>
+<% end %>
+
+<% if !@result.nan?  %>
+     <p>Every one should pay $<%= @result.round(2) %><p>
+<% end %>

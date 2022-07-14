@@ -1,0 +1,124 @@
+<div class="row">
+    <div class="col-6">
+        <div class="card mb-5">
+            <%= image_tag @product.image_file, class:"card-img-top" %>
+            <div class="card-body">
+                <h1 class="mb-3 card-title"><%= @product.title %></h1>
+                <p class="card-text">Description: <%= @product.description %> </p>
+                <p class="card-text">Price: <%= number_to_currency(@product.price) %></p>
+                  
+                <% if @product.sale_price < @product.price %> 
+                    <p class="card-text">Sale Price: <%= number_to_currency(@product.sale_price) %></p>
+                <% end %> 
+                <p class="card-text show-chef">Chef: <%= @product.user.full_name %></p>
+                <% if can?(:crud, @product) %> <%# this also works? => if current_user == @product.user %>
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group me-2" role="group">
+                            <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-info mb-3"%>
+                        </div>
+                        <div class="btn-group" role="group">
+                        <%= button_to 'Delete', product_path(@product), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn btn-warning mb-3"  %>
+                        </div>
+                    </div>
+                <% end %> 
+                
+            </div>
+        </div>
+        <div class="px-1">
+        <h3>Write a Review</h3>
+        
+        <% if @review.errors.any? %> 
+            <% @review.errors.full_messages.each do |msg| %> 
+                <p><%= msg %> </p>
+            <% end %> 
+        <% end %> 
+        
+        <%= form_with(model:[@product, @review]) do |form|%>
+            <div class="mb-3">
+                <%= form.label :rating, class: "form-label"%>
+                <br>
+                <%= form.text_field :rating, class: "form-control"%>
+            </div>
+            <div class="mb-3">
+                <%= form.label :body, class: "form-label" %>
+                <br>
+                <%= form.text_area :body, cols: 50, rows: 5, class: "form-control" %>
+            </div>
+            <%= form.submit class: "btn btn-info mb-3"%>
+        <% end %>
+    </div>
+    </div>
+    
+    <div class="col-6">
+        <h3 class="mb-3 reviews-headline">Reviews</h3>
+    <% if current_user && @product.user == current_user %>
+            <% @reviews.each do |review| %>
+                <% if review.hidden %> 
+                    <div class="card mb-3 gray-card">
+                <% else %> 
+                    <div class="card mb-3">
+                <% end %>
+            
+                <div class="card-body">
+                <h5>Rating: <%= review.rating %></h5>
+                <p>Details: <%= review.body %></p>
+                <p class="text-muted"><small>Created <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.full_name %></small></p>
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <% if can?(:crud, review) %> 
+                    <div class="btn-group me-2" role="group">
+                        <%= button_to "Edit", edit_product_review_path(@product, review),method: :get, class: "btn btn-info mb-3" %> 
+                        </div>
+                        <div class="btn-group me-2" role="group">
+                        <%= button_to "Delete", product_review_path(@product, review), method: :delete, form: { data: { turbo_confirm: "Are you sure?"}}, class: "btn btn-warning mb-3" %> 
+                        </div>
+                    <% end %> 
+                    
+
+                    <% if review.hidden? %>
+                        <div class="btn-group" role="group">    
+                            <%= button_to "Unhide", change_path(@product, review), method: :patch, class: "btn btn-success" %> 
+                         </div>
+                    <% else %>
+                        <div class="btn-group" role="group">
+                            <%= button_to "Hide", change_path(@product, review), method: :patch, class: "btn btn-success" %> 
+                        </div>
+                    <% end %>
+                   </div>  
+                 </div>
+                </div>
+            <% end %> 
+     <% else %> 
+            <% @reviews.each do |review| %>
+            <% if !review.hidden %> 
+                
+                <div class="card mb-3">
+            
+            
+                <div class="card-body">
+                <h5>Rating: <%= review.rating %></h5>
+                <p>Details: <%= review.body %></p>
+                <p class="text-muted"><small>Created <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.full_name %></small></p>
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <% if can?(:crud, review) %> 
+                        <div class="btn-group me-2" role="group">
+                            <%= button_to "Edit", edit_product_review_path(@product, review),method: :get, class: "btn btn-info mb-3" %> 
+                        </div>
+                        <div class="btn-group" role="group">
+                            <%= button_to "Delete", product_review_path(@product, review), method: :delete, form: { data: { turbo_confirm: "Are you sure?"}}, class: "btn btn-warning" %> 
+                        </div>
+                    <% end %> 
+                </div>
+
+            </div>
+            </div>
+            <% end %>
+        <% end %> 
+        <% end %>
+
+    </div>  
+</div>
+
+
+
+
+
