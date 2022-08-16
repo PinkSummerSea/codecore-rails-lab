@@ -1,24 +1,15 @@
-# README
+Project Name:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Gourmet Paradise
 
-Things you may want to cover:
+-------------------
 
-* Ruby version
+Description:
 
-* System dependencies
+This responsive app built with Ruby on Rails has full CRUD functions, user authentication as well as authorization implemented. User can sign up, create or edit their own products, and leave reviews. The product owner can choose to hide or display the reviews they received. The admin user can review app data (info of all users, products, and reviews) in an admin panel page.
 
-* Configuration
+--------------------
 
-* Database creation
+Tech Stack:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Ruby on Rails, Bootstrap, PostgreSQL
