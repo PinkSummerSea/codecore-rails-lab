@@ -7,7 +7,10 @@ class User < ApplicationRecord
     
     has_many :products, dependent: :nullify
     has_many :reviews, dependent: :nullify
-    
+    has_many :news_articles, dependent: :nullify
+    has_many :likes, dependent: :nullify
+    has_many :liked_reviews, through: :likes, source: :review
+
     before_validation :downcase_email
 
     validates :first_name, presence: true
@@ -26,7 +29,7 @@ class User < ApplicationRecord
     end
 
     def downcase_email
-        self.email = email.downcase
+        self.email = self.email.downcase
     end
 
 end

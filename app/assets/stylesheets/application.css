@@ -170,6 +170,10 @@ a:hover {
    background-color: rgb(158, 158, 241) !important;
 }
 
+h2 {
+   color: rgb(158, 158, 241);
+}
+
 .gray-card {
    background-color: rgb(238, 237, 237) !important;
 }

@@ -7,6 +7,8 @@ class ReviewsController < ApplicationController
         @review.product = @product
         @review.user = current_user
         if @review.save
+            # ProductMailer.review_notification(@review).deliver_now
+            ProductMailer.delay(run_at: 2.minutes.from_now).review_notification(@review)
             redirect_to product_path(@product), notice: "Review Created"
         else  
             @reviews = @product.reviews.order(created_at: :desc)

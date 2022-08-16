@@ -19,5 +19,17 @@ class Ability
     can :crud, Review do |review|
       user == review.user
     end
+
+    can :crud, NewsArticle do |news_article|
+      user == news_article.user
+    end
+
+    can :like, Review do |review|
+      user.persisted? && review.user != user
+    end
+
+    can :destroy, Like do |like|
+      user == like.user 
+    end
   end
 end

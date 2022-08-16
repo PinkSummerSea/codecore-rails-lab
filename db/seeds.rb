@@ -6,7 +6,9 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-
+Tagging.destroy_all
+Tag.destroy_all
+Like.destroy_all
 Product.destroy_all
 Review.destroy_all
 User.destroy_all
@@ -19,13 +21,13 @@ super_user = User.create({
   is_admin: true
 })
 
-summer = User.create({
+summer = User.create(
   first_name: "Summer",
   last_name: "Lin",
   email: "lin.summer@outlook.com",
   password: "8855705",
   is_admin: true
-})
+)
 
 10.times do
     first_name = Faker::Name.first_name
@@ -39,6 +41,16 @@ summer = User.create({
 end
 
 users = User.all
+
+
+10.times do
+    Tag.create(
+        name: Faker::Food.ethnic_category
+    )
+end
+
+tags = Tag.all
+
 
 i = 0
 
@@ -60,13 +72,15 @@ i = 0
 
     if p.valid?
         rand(5..10).times do
-            Review.create(
+            r = Review.create(
                 rating: rand(1..5),
                 body: Faker::Quote.most_interesting_man_in_the_world,
                 product: p,
                 user: users.sample
             )
+            r.likers = users.shuffle.slice(0, rand(users.count))
         end
+        p.tags = tags.shuffle.slice(0, rand(tags.count))
     end
 
 end

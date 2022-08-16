@@ -6,6 +6,9 @@ class Product < ApplicationRecord
     has_many :reviews, dependent: :destroy
     belongs_to :user
 
+    has_many :taggings, dependent: :destroy
+    has_many :tags, through: :taggings
+
     validates :title, presence: true, uniqueness: { case_sensitive: false }, exclusion: { in: %w(Apple Microsoft Sony),
     message: "%{value} is reserved." }
     validates :price, numericality: { greater_than: 0 }
@@ -25,9 +28,7 @@ class Product < ApplicationRecord
         def set_defaults
             self.price ||=1.0
             self.sale_price ||=self.price
-        end
-
-        
+        end      
 
         def capitalize_title
             self.title.capitalize!

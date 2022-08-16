@@ -1,0 +1,5 @@
+<p>Hello, <%= @owner.first_name %>,</p>
+<p>Your product title is: <%= @product.title %></p>
+<p>Your product description is: <%= @product.description %></p>
+<p>Your product price is: <%= @product.price %></p>
+<p><%= link_to "View your product page", product_url(@product) %></p>

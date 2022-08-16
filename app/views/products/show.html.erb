@@ -11,6 +11,7 @@
                     <p class="card-text">Sale Price: <%= number_to_currency(@product.sale_price) %></p>
                 <% end %> 
                 <p class="card-text show-chef">Chef: <%= @product.user.full_name %></p>
+                <p class="card-text">Tags: <%= @product.tags.map(&:name).join(", ") %></p>
                 <% if can?(:crud, @product) %> <%# this also works? => if current_user == @product.user %>
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group me-2" role="group">
@@ -65,14 +66,21 @@
                 <p class="text-muted"><small>Created <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.full_name %></small></p>
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <% if can?(:crud, review) %> 
-                    <div class="btn-group me-2" role="group">
+                        <div class="btn-group me-2" role="group">
                         <%= button_to "Edit", edit_product_review_path(@product, review),method: :get, class: "btn btn-info mb-3" %> 
                         </div>
                         <div class="btn-group me-2" role="group">
                         <%= button_to "Delete", product_review_path(@product, review), method: :delete, form: { data: { turbo_confirm: "Are you sure?"}}, class: "btn btn-warning mb-3" %> 
                         </div>
+                    <% else %> 
+                        <% @like = review.likes.find_by user: current_user %> 
+                        <% if !@like.present? %> 
+                            <%= button_to "Like", product_review_likes_path(@product, review),method: :post, class: "btn btn-info mb-3 me-2" %>
+                        <% else %> 
+                            <%= button_to "Unlike", product_review_like_path(@product, review, @like),method: :delete, class: "btn btn-warning mb-3 me-2" %>
+                        <% end %> 
                     <% end %> 
-                    
+                     
 
                     <% if review.hidden? %>
                         <div class="btn-group" role="group">    
@@ -83,7 +91,9 @@
                             <%= button_to "Hide", change_path(@product, review), method: :patch, class: "btn btn-success" %> 
                         </div>
                     <% end %>
+                    
                    </div>  
+                   <p>Liked by <%= review.likes.count %> users</p>
                  </div>
                 </div>
             <% end %> 
@@ -106,10 +116,19 @@
                         <div class="btn-group" role="group">
                             <%= button_to "Delete", product_review_path(@product, review), method: :delete, form: { data: { turbo_confirm: "Are you sure?"}}, class: "btn btn-warning" %> 
                         </div>
+                    <% else %> 
+                        <% @like = review.likes.find_by user: current_user %> 
+                        <% if !@like.present? %> 
+                            <%= button_to "Like", product_review_likes_path(@product, review),method: :post, class: "btn btn-info mb-3 me-2" %>
+                        <% else %> 
+                            <%= button_to "Unlike", product_review_like_path(@product, review, @like),method: :delete, class: "btn btn-warning mb-3 me-2" %>
+                        <% end %>
                     <% end %> 
+                    
                 </div>
-
+                <p>Liked by <%= review.likes.count %> users</p> 
             </div>
+            
             </div>
             <% end %>
         <% end %> 

@@ -1,0 +1,208 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ body {
+   font-family: 'Playfair Display', serif;
+ }
+
+ .title-list-item {
+    text-decoration: none; 
+    font-size: large;
+    font-weight: bold;
+    color: rgb(109, 109, 244)
+ }
+ .title-list-item:hover {
+    text-decoration: none; 
+    color: rgb(98, 98, 232)
+ }
+
+ .my-nav {
+    background-color: lavender !important;
+ }
+
+ .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+ }
+
+ .item-container {
+    margin-right: 1em;
+ }
+
+ .img-container {
+    overflow: hidden;
+    width: 80%;
+    height: 40em;
+    display:inline-block;
+    vertical-align:middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .btn-warning {
+   background-color:rgb(204, 204, 248);
+   border-color: rgb(204, 204, 248);
+ }
+
+ .btn-warning:hover {
+   background-color:rgb(158, 158, 241);
+   border-color: rgb(158, 158, 241);
+ }
+
+ .btn-info {
+   background-color:rgb(248, 204, 247);
+   border-color: rgb(248, 204, 247);
+ }
+
+ .btn-info:hover {
+   background-color:rgb(243, 173, 242);
+   border-color: rgb(243, 173, 242);
+ }
+
+ .btn-success {
+   background-color:rgb(198, 230, 251);
+   border-color: rgb(198, 230, 251);
+   color: black;
+ }
+
+ .btn-success:hover {
+   background-color:rgb(163, 216, 251);
+   border-color: rgb(163, 216, 251);
+   color: black;
+ }
+
+.navbar-brand {
+   font-size:xx-large;
+   font-weight:500;
+   font-style: italic;
+   color: rgb(255, 136, 193);
+}
+
+.navbar-brand:hover {
+   font-size:xx-large;
+   font-weight:500;
+   color: rgb(244, 89, 164);
+   font-style: italic;
+}
+
+.reviews-headline {
+   color:rgb(158, 158, 241);
+   font-weight: 300;
+   font-style: italic;
+}
+ /* .show-image {
+    max-width: fit-content;
+ } */
+
+.create-headline {
+   color:rgb(158, 158, 241);
+   font-weight: 300;
+   
+}
+
+.footer {
+   background-color: lavender !important;
+   text-align: center;
+}
+
+.footer-text {
+   color: rgb(97, 97, 97);
+   
+}
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+a:hover {
+   text-decoration: none;
+   color: black;
+}
+
+.index-chef {
+   font-size: small;
+   color: rgb(157, 155, 155);
+   font-style: italic;
+   font-weight: 100;
+}
+
+.show-chef {
+   font-size:medium;
+   color: rgb(157, 155, 155);
+   font-style: italic;
+   font-weight: 100;
+}
+
+.gray-background {
+   background-color: rgb(220, 220, 220);
+}
+
+.admin-panel-headline {
+   color:rgb(193, 193, 193);
+   font-weight: 500;
+   margin-bottom: 1em;
+   text-align: center;
+}
+
+.table-headline {
+   text-align: center;
+   color:rgb(158, 158, 241);
+   font-weight: 300;
+   font-style: italic;
+}
+
+.number-badge {
+   background-color: rgb(158, 158, 241) !important;
+}
+
+.gray-card {
+   background-color: rgb(238, 237, 237) !important;
+}
+
+.index-card {
+   width: 18rem;
+}
+
+.right-table {
+   margin-left: 5em;
+}
+
+
+.mx-20 {
+   margin-left: 10em;
+   margin-right: 10em;
+}
+
+
+@media (max-width: 700px) {
+   .index-card {
+       width: 100%;
+
+   }
+
+   .left-half {
+      width: 100%;
+   }
+
+   .right-half {
+      margin-top: 2em;
+      width: 100%;
+      margin-left: 0%;
+   }
+
+}

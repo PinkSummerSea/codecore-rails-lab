@@ -1,0 +1,5 @@
+<p>Hello, <%= @owner.first_name %>,</p>
+<p>Your product <%= @product.title %> just got a new review: </p>
+<p>"<%= @review.body %>"</p>
+<p>By <%= @review.user.full_name %></p>
+<p><%= link_to "View your product and reviews", product_url(@product) %></p>

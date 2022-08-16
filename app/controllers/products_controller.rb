@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
         @product.user = current_user
         if @product.save
             flash[:notice] = "Successfully created a new product!"
+            ProductMailer.delay.notify_product_owner(@product)
             redirect_to product_path(@product)
         else 
             render :new
@@ -20,11 +21,16 @@ class ProductsController < ApplicationController
 
     def index
         @products = Product.order(updated_at: :desc)
+        respond_to do |format|
+            format.html { render }
+            format.json { render json: @products } 
+        end
     end
 
     def show
         @reviews = @product.reviews.order(created_at: :desc)
         @review = Review.new
+        
     end
 
     def edit
